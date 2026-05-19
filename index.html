@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gökdeniz Uzun | Photography</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- TEMA AYARLARI --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg-dark: #0b1528;       /* Okyanus Mavisi Arka Plan */
+            --bg-card: #13223f;       /* Kartlar için Lacivert */
+            --blue-neon: #0077ff;     /* Canlı Mavi */
+            --blue-glow: #00f0ff;     /* Açık Deniz Mavisi */
+            --text-light: #f4f6f9;    /* Beyaz Yazı */
+            --text-muted: #9bb0dc;    /* Soluk Mavi Yazı */
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* --- ARKA PLAN EFEKTLERİ --- */
+        .glow-bg-1 {
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(0, 119, 255, 0.15) 0%, rgba(11, 21, 40, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .glow-bg-2 {
+            position: absolute;
+            top: 600px;
+            left: -200px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.08) 0%, rgba(11, 21, 40, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- ÜST MENÜ (HEADER) --- */
+        header {
+            background-color: rgba(11, 21, 40, 0.85);
+            backdrop-filter: blur(12px);
+            padding: 20px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--blue-glow);
+        }
+
+        /* Butonlar */
+        .btn {
+            padding: 12px 28px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-blue {
+            background-color: var(--blue-neon);
+            color: white;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0, 119, 255, 0.3);
+        }
+
+        .btn-blue:hover {
+            background-color: #005ecb;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--blue-glow);
+            border: 2px solid var(--blue-neon);
+            border-radius: 50px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--blue-neon);
+            color: white;
+        }
+
+        /* --- ANA SAYFA (HERO) ALANI --- */
+        .hero {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 60px 8%;
+            min-height: 85vh;
+            gap: 50px;
+        }
+
+        .hero-content {
+            flex: 1.2;
+        }
+
+        .hero-content .tagline {
+            color: var(--blue-glow);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .hero-content h1 {
+            font-size: 3.8rem;
+            line-height: 1.15;
+            color: var(--text-light);
+            margin-bottom: 25px;
+        }
+
+        .hero-content h1 span {
+            color: var(--blue-neon);
+            background: linear-gradient(to right, var(--blue-neon), var(--blue-glow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 35px;
+            max-width: 540px;
+            line-height: 1.7;
+        }
+
+        /* Giriş Bölümü Sağ Taraftaki Görsel Alanı */
+        .hero-image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Resmin tam yuvarlak kalabilmesi için genişlik ve yükseklik eşitlendi */
+        .hero-photo-circle {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--blue-neon);
+            box-shadow: 0 0 40px rgba(0, 119, 255, 0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero-photo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- BÖLÜM BAŞLIKLARI --- */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header .top-title {
+            color: var(--blue-glow);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--text-light);
+        }
+
+        /* --- HAKKIMIZDA BÖLÜMÜ --- */
+        .about {
+            padding: 100px 8%;
+            background-color: rgba(19, 34, 63, 0.4);
+            position: relative;
+        }
+
+        .about-grid {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            flex: 1.2;
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            line-height: 1.3;
+            margin-bottom: 25px;
+            color: var(--text-light);
+        }
+
+        .about-content p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .about-media-wrapper {
+            flex: 1;
+        }
+
+        .about-image-frame {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 119, 255, 0.2);
+        }
+
+        .about-image-frame img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .about-image-frame-mask {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(11, 21, 40, 0.7) 0%, rgba(0, 119, 255, 0.1) 100%);
+            pointer-events: none;
+        }
+
+        .about-image-frame-title {
+            position: absolute;
+            bottom: 25px;
+            left: 25px;
+            color: var(--blue-glow);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+        }
+
+        /* İstatistik Sayıları */
+        .counter-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            background-color: var(--bg-dark);
+            padding: 25px 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 40px;
+            border: 1px solid rgba(0, 119, 255, 0.1);
+        }
+
+        .counter-box h4 {
+            font-size: 1.8rem;
+            color: var(--blue-glow);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .counter-box p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- HİZMETLERİMİZ BÖLÜMÜ --- */
+        .services {
+            padding: 100px 8%;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background-color: var(--bg-card);
+            padding: 45px 25px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 119, 255, 0.15);
+            border-color: var(--blue-glow);
+        }
+
+        .service-card .icon-wrapper {
+            width: 65px;
+            height: 65px;
+            background-color: rgba(0, 119, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 25px auto;
+            color: var(--blue-glow);
+            font-size: 1.6rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* --- ÇALIŞLARIMIZ (GALERİ) --- */
+        .portfolio {
+            padding: 100px 8%;
+            background-color: rgba(19, 34, 63, 0.2);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Kutu Büyüme (Zoom) Ayarları */
+        .portfolio-card {
+            position: relative;
+            aspect-ratio: 4/3;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            background-color: var(--bg-card);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        .portfolio-card:hover {
+            transform: scale(1.04); /* Kutu bütün olarak büyüyor */
+            border-color: var(--blue-glow);
+            box-shadow: 0 10px 25px rgba(0, 240, 255, 0.15);
+            z-index: 10;
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- TEKLİF BANNERI --- */
+        .cta-banner {
+            background: linear-gradient(135deg, #13223f 0%, #0b1528 100%);
+            margin: 80px 8%;
+            padding: 60px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(0, 240, 255, 0.1);
+        }
+
+        .cta-text h2 {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+        }
+
+        .cta-text p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #060c18;
+            padding: 80px 8% 30px 8%;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 50px;
+            max-width: 1200px;
+            margin: 0 auto 60px auto;
+        }
+
+        .footer-logo-area p {
+            color: var(--text-muted);
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .footer-col h4 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: var(--blue-glow);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--blue-glow);
+        }
+
+        .footer-contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-contact-info i {
+            color: var(--blue-glow);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Mobil Düzen */
+        @media (max-width: 992px) {
+            nav ul, header .btn { display: none; }
+            .hero { flex-direction: column; text-align: center; padding-top: 40px; }
+            .hero-content h1 { font-size: 2.6rem; }
+            .hero-content p { margin: 0 auto 30px auto; }
+            .about-grid { flex-direction: column; gap: 40px; }
+            .services-grid, .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .cta-banner { flex-direction: column; gap: 30px; text-align: center; }
+            .footer-grid { grid-template-columns: 1fr; gap: 35px; }
+            .footer-bottom { flex-direction: column; gap: 15px; text-align: center; }
+        }
+
+        @media (max-width: 576px) {
+            .services-grid, .portfolio-grid { grid-template-columns: 1fr; }
+            .counter-strip { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-bg-1"></div>
+    <div class="glow-bg-2"></div>
+
+    <header>
+        <a href="#home" class="logo" style="text-decoration: none; display: flex; align-items: center; gap: 15px;">
+            <img src="Resimler/Gökdeniz Uzun Monogram.PNG" alt="GU Monogram" style="
+                height: 55px; 
+                width: auto; 
+                object-fit: contain;
+                filter: drop-shadow(0 0 10px rgba(0, 119, 255, 0.4));
+            ">
+            <div style="display: flex; flex-direction: column; justify-content: center;">
+                <span class="logo-text" style="font-size: 1.25rem; font-weight: 700; color: var(--text-light); letter-spacing: 2px; line-height: 1.1;">PHOTO</span>
+                <span class="logo-text" style="font-size: 1.25rem; font-weight: 700; color: var(--text-light); letter-spacing: 2px; line-height: 1.1; margin-top: 1px;">STUDIO</span>
+            </div>
+        </a>
+        
+        <nav>
+            <ul>
+                <li><a href="#home">Giriş</a></li>
+                <li><a href="#about">Hakkımda</a></li>
+                <li><a href="#services">Hizmetler</a></li>
+                <li><a href="#portfolio">Galeri</a></li>
+                <li><a href="#footer">İletişim</a></li>
+            </ul>
+        </nav>
+        <a href="#footer" class="btn btn-blue">İletişim <i class="fa-solid fa-camera"></i></a>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="tagline">Sualtı ve Doğa Fotoğrafçılığı</span>
+            <h1>Derinliklerdeki<br>Hayatı <span>Yakala</span></h1>
+            <p>Okyanusların gizemli dünyasını, profesyonel ekipmanlar ve sanatsal bakış açısıyla kadrajımıza alıyoruz.</p>
+            <a href="#portfolio" class="btn btn-outline">Galeriye Göz At +</a>
+        </div>
+        
+        <div class="hero-image-container">
+            <div class="hero-photo-circle">
+                <img src="Resimler/ocean10.png" alt="Derin Deniz Işıkları ve Balıklar">
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="about-grid">
+            <div class="about-content">
+                <div class="section-header" style="text-align: left; margin-bottom: 30px;">
+                    <span class="top-title">Hikayem</span>
+                    <h2>Hakkımda</h2>
+                </div>
+                <h3>Denizin Altındaki Sessiz Dünyanın Peşinde</h3>
+                <p>Ben Gökdeniz Uzun. Yaklaşık 5 yıldır profesyonel olarak sualtı dalışları gerçekleştiriyor ve deniz canlılarının büyüleyici yaşamlarını fotoğraflıyorum.</p>
+                <p>Amacım, insan gözünün nadiren şahit olduğu o masmavi derinliklerdeki doğal yaşamı ve renkleri en saf haliyle yüzeye çıkarmak.</p>
+            </div>
+            
+            <div class="about-media-wrapper">
+                <div class="about-image-frame">
+                    <img src="Resimler/ocean1.jpg" alt="Mavi Okyanus Derinlikleri">
+                    <div class="about-image-frame-mask"></div>
+                    <div class="about-image-frame-title">Okyanus Derinlikleri</div>
+                </div>
+
+                <div class="counter-strip">
+                    <div class="counter-box">
+                        <h4>450+</h4>
+                        <p>Dalış Sayısı</p>
+                    </div>
+                    <div class="counter-box">
+                        <h4>30+</h4>
+                        <p>Şehir/Ülke</p>
+                    </div>
+                    <div class="counter-box">
+                        <h4>4</h4>
+                        <p>Sergi</p>
+                    </div>
+                    <div class="counter-box">
+                        <h4>5</h4>
+                        <p>Yıl Deneyim</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="section-header">
+            <span class="top-title">Neler Yapıyorum?</span>
+            <h2>Hizmet Alanları</h2>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="icon-wrapper"><i class="fa-solid fa-fish"></i></div>
+                <h3>Sualtı Çekimleri</h3>
+                <p>Deniz canlıları, mercan resifleri ve sualtı habitatlarının profesyonel fotoğrafçılığı.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon-wrapper"><i class="fa-solid fa-compass"></i></div>
+                <h3>Doğa & Manzara</h3>
+                <p>Deniz kıyıları, vahşi doğa ve açık alanlarda sanatsal manzara çekimleri.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon-wrapper"><i class="fa-solid fa-images"></i></div>
+                <h3>Stok Görsel</h3>
+                <p>Belgeseller, dergiler ve dijital medya platformları için yüksek çözünürlüklü arşiv.</p>
+            </div>
+            <div class="service-card">
+                <div class="icon-wrapper"><i class="fa-solid fa-chalkboard-user"></i></div>
+                <h3>Atölye & Eğitim</h3>
+                <p>Yeni başlayanlar için temel sualtı fotoğrafçılığı ve ekipman eğitimleri.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio" id="portfolio">
+        <div class="section-header">
+            <span class="top-title">Koleksiyon</span>
+            <h2>Fotoğraf Galerisi</h2>
+        </div>
+        
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <img src="Resimler/ocean2.jpg" alt="Derin Mavi Balık Sürüsü">
+            </div>
+            
+            <div class="portfolio-card">
+                <img src="Resimler/ocean3.jpg" alt="Balına Köpekbalığı Silüeti" style="object-position: center 30%;">
+            </div>
+            
+            <div class="portfolio-card">
+                <img src="Resimler/ocean5.png" alt="Turkuaz Suda Yüzen Yunus">
+            </div>
+            
+            <div class="portfolio-card">
+                <img src="Resimler/ocean4.png" alt="Berrak Suda Balına Köpekbalığı">
+            </div>
+            
+            <div class="portfolio-card">
+                <img src="Resimler/ocean6.png" alt="Zengin Mercan Resifi ve Balık Sürüsü">
+            </div>
+            
+            <div class="portfolio-card">
+                <img src="Resimler/ocean7.png" alt="Deniz Kaplumbağası Sualtı Süzülüşü">
+            </div>
+            
+            <div class="portfolio-card">
+                <img src="Resimler/ocean8.png" alt="Katil Balina Açık Deniz">
+            </div>
+            
+            <div class="portfolio-card">
+                <img src="Resimler/ocean9.png" alt="Sualtı Çekimi Kamera Arkası Dalgıç">
+            </div>
+        </div>
+    </section>
+
+    <div class="cta-banner">
+        <div class="cta-text">
+            <h2>Bir Sonraki Projede Birlikte Çalışalım</h2>
+            <p>Projeleriniz, sergileriniz veya stok görsel talepleriniz için bana ulaşabilirsiniz.</p>
+        </div>
+        <a href="#footer" class="btn btn-blue">Mesaj Gönder ></a>
+    </div>
+
+    <footer id="footer">
+        <div class="footer-grid">
+            <div class="footer-logo-area">
+                <a href="#home" class="logo" style="text-decoration: none; display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <img src="Resimler/Gökdeniz Uzun Monogram.PNG" alt="GU Monogram" style="height: 45px; width: auto; object-fit: contain;">
+                </a>
+                <p>Doğanın ve denizlerin gizli kalmış anlarını ölümsüzleştiren kişisel portfolyo.</p>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Sayfalar</h4>
+                <ul>
+                    <li><a href="#home">Giriş</a></li>
+                    <li><a href="#about">Hakkımda</a></li>
+                    <li><a href="#services">Hizmetler</a></li>
+                    <li><a href="#portfolio">Galeri</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Kategoriler</h4>
+                <ul>
+                    <li><a href="#portfolio">Sualtı Makro</a></li>
+                    <li><a href="#portfolio">Okyanus Yaşamı</a></li>
+                    <li><a href="#portfolio">Manzara Çekimi</a></li>
+                    <li><a href="#portfolio">Eğitim Blogu</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-contact-info">
+                <h4>İletişim</h4>
+                <p><i class="fa-solid fa-envelope"></i> gokdeniz@uzunphoto.com</p>
+                <p><i class="fa-solid fa-phone"></i> +90 555 987 65 43</p>
+                <p><i class="fa-solid fa-location-dot"></i> İstanbul, Türkiye</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 Gökdeniz Uzun | Web Tasarımı Dersi Final Projesi. Tüm hakları saklıdır.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
